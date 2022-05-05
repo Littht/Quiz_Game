@@ -1,5 +1,5 @@
-const randomNumber = () => {
-    random = Math.random() * 2;
+const randomNumber = (offset) => {
+    random = Math.random() * offset;
     random = Math.floor(random)
     return random
 }
@@ -68,12 +68,15 @@ const buildQuestion = () => {
      * ['easy', 'medium', 'hard']
      */
     const keys = Object.keys(questionsWithOptions)
+    const difficulty = keys[Math.floor(Math.random() * keys.length)]
+    const offset = questionsWithOptions[difficulty].length
+    const index = randomNumber(offset)
  
     setAnswerWithQuestions({
         // selecciona una dificultad random
-        difficulty: keys[Math.floor(Math.random() * keys.length)],
+        difficulty,
         // selecciona un index random de dicha dificultad
-        index: randomNumber()
+        index
     })
 }
 
