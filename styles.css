@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.header{
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#answer{
+    text-align: center;
+    font-size: 3rem;
+}
+
+.container-options{
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    flex-direction: column;
+}
+
+.container-options-position{
+    display: flex;
+    gap: 3rem;
+}
+
+.container-options-position div{
+    background-color: blueviolet;
+    width: 35vw;
+    height: 10vh;
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 1.3rem;
+}
