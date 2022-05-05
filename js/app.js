@@ -7,6 +7,7 @@ const randomNumber = () => {
 /**
  * este objecto solo lo hice para centralizar todas las preguntas y opciones
  * organizadolas por dificultad
+ * 
  */
 const questionsWithOptions = {
     easy: easyQuestions,
