@@ -4,6 +4,10 @@ const randomNumber = () => {
     return random
 }
 
+/**
+ * este objecto solo lo hice para centralizar todas las preguntas y opciones
+ * organizadolas por dificultad
+ */
 const questionsWithOptions = {
     easy: easyQuestions,
     medium: mediumQuestions,
@@ -14,6 +18,9 @@ const setOption = ({ letter = 'A', option = '', id, answer } = {}) => {
     const nodeOption = document.querySelector(id)
     nodeOption.innerHTML = `${letter}: ${option}`;
 
+    /**
+     * Evento click para cada opcion
+     */
     nodeOption.addEventListener('click', () => {
         if (option === answer) {
             alert('Correct Answer');
@@ -26,48 +33,47 @@ const setOption = ({ letter = 'A', option = '', id, answer } = {}) => {
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 const setAnswerWithQuestions = ({ difficulty = 'easy', index = 1 } = {}) => {
+    /**
+     * Selecctiona del objeto { easy: {...}, medium: {...}, hard: {...} } el que tenga el nombre que haya en difficulty, por defecto viene easy
+     */
     const questions = questionsWithOptions[difficulty][index];
+
     const options = [...questions.options];
     options.push(questions.answer);
     options.sort(() => Math.random() - 0.5);
     document.querySelector("#answer").innerHTML = questions.question;
+    /**
+     * options es un array, asi que puedes iterarlo para configurarlos todos en un solo proceso
+     */
     options.forEach((option, index) => setOption({
+        /**
+         * este alphabet solo lo cree para que la letra se asigne automaticamente por si quieres agregar mas opciones xD
+         */
         letter: alphabet.charAt(index),
         option: option,
         id: `#option${index + 1}`,
         value: option,
+        /**
+         * le estoy pasando al configurador la respuesta correcta para que el evento click lo maneje
+         */
         answer: questions.answer
     }))
 }
 
-setAnswerWithQuestions({
-    difficulty: 'easy',
-    index: randomNumber()
-})
+const buildQuestion = () => {
+    /**
+     * transforma { easy: {...}, medium: {...}, hard: {...} }
+     * en
+     * ['easy', 'medium', 'hard']
+     */
+    const keys = Object.keys(questionsWithOptions)
+ 
+    setAnswerWithQuestions({
+        // selecciona una dificultad random
+        difficulty: keys[Math.floor(Math.random() * keys.length)],
+        // selecciona un index random de dicha dificultad
+        index: randomNumber()
+    })
+}
 
-/** 
- * No tengo idea de porque estas creando este loop >.>
- * supongo que es para que aparezca una pregunta de una dificultad aleatoria
- * de ser asi, con el approach actual te sugiero usar lo siguiente
- * 
- * const keys = Object.keys(questionsWithOptions)
- * 
- * setAnswerWithQuestions({
- *   difficulty: keys[Math.floor(Math.random() * keys.length)],
- *   index: randomNumber()
- * })
- * 
- * */
-
-// for (let i = 1; i <= 3; i++) {
-//     if (i <= 1) {
-//         setAnswerWithQuestions({
-//             difficulty: 'easy',
-//             index: randomNumber()
-//         })
-//     }
-//     else if (i <= 2) {
-//     }
-//     else if (i <= 3) {
-//     }
-// }
+buildQuestion()
